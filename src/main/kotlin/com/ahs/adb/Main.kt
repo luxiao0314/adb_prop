@@ -4,6 +4,8 @@ import com.ahs.adb.shell.AndroidDevice
 import com.ahs.adb.shell.ShellKit
 import com.ahs.adb.utils.FileUtil
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -21,19 +23,23 @@ fun main(args: Array<String>) {
 
         val androidDevice = AndroidDevice()
 
-        val brand = androidDevice.brand?.trim().toString()
+        val brand = androidDevice.brand?.trim().toString().toUpperCase()
 
         Thread.sleep(1000)
 
-        if (!brand.contains("no devices") && !brand.contains("unauthorized")) {
+        if (!brand.contains("NO DEVICES") && !brand.contains("UNAUTHORIZED") && !brand.contains("ERROR")) {
 
-            val name = "${brand.toUpperCase()}_${androidDevice.model?.trim()}_${androidDevice.imei}.txt"
+            val time = SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(Date())
 
-            val path = "/Users/lux/Downloads/prop/$name"
+            val name = "${brand}/${time}_${androidDevice.model?.trim()}(${brand})_${androidDevice.imei}"
 
-            println("filename: $name")
+            println(name)
 
-            if (!hasResult || !File(path).exists()) {
+            if (!hasResult) {
+
+                val path = "/Users/lux/Downloads/prop/$name.txt"
+
+                println("filename: $name")
 
                 hasResult = true
 
