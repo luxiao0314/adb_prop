@@ -23,13 +23,15 @@ fun main(args: Array<String>) {
 
         val androidDevice = AndroidDevice()
 
-        val brand = androidDevice.brand?.trim().toString().toUpperCase()
+        var brand = androidDevice.brand?.trim().toString()
 
         Thread.sleep(1000)
 
-        if (!brand.contains("NO DEVICES") && !brand.contains("UNAUTHORIZED") && !brand.contains("ERROR")) {
+        if (!brand.contains("no devices") && !brand.contains("unauthorized") && !brand.contains("error")) {
 
             val time = SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(Date())
+
+            brand = brand.toUpperCase()
 
             val name = "${brand}/${time}_${androidDevice.model?.trim()}(${brand})_${androidDevice.imei}"
 
