@@ -41,8 +41,6 @@ fun main(args: Array<String>) {
 
                 val path = "/Users/lux/Downloads/prop/$name.txt"
 
-                println("filename: $name")
-
                 hasResult = true
 
                 val result = ShellKit.adb("shell getprop")
